@@ -11,8 +11,8 @@ langchain-groq
 groq
 yfinance>=0.2.36
 python-dotenv
-streamlit
-streamlit-chat
+fastapi>=0.109.0
+uvicorn>=0.27.0
 beautifulsoup4==4.12.2
 requests==2.31.0
 pandas>=2.0.0
