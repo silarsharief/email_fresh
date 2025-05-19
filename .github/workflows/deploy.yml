@@ -9,6 +9,7 @@ env:
   PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
   SERVICE_NAME: email-bot
   REGION: asia-south1
+  REPOSITORY: email-bot
 
 jobs:
   deploy:
@@ -35,15 +36,15 @@ jobs:
 
     - name: Build and Push Container
       run: |
-        docker build -t asia-south1-docker.pkg.dev/${{ env.PROJECT_ID }}/email-bot/email-bot:${{ github.sha }} .
-        docker push asia-south1-docker.pkg.dev/${{ env.PROJECT_ID }}/email-bot/email-bot:${{ github.sha }}
+        docker build -t asia-south1-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/email-bot:${{ github.sha }} .
+        docker push asia-south1-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/email-bot:${{ github.sha }}
 
     - name: Deploy to Cloud Run
       uses: google-github-actions/deploy-cloudrun@v2
       with:
         service: ${{ env.SERVICE_NAME }}
         region: ${{ env.REGION }}
-        image: asia-south1-docker.pkg.dev/${{ env.PROJECT_ID }}/email-bot/email-bot:${{ github.sha }}
+        image: asia-south1-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/email-bot:${{ github.sha }}
         flags: '--allow-unauthenticated'
         env_vars: |
           EMAIL_ADDRESS=${{ secrets.EMAIL_ADDRESS }}
