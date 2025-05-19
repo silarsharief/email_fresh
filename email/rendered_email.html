@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Market Digest</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Montserrat:wght@400;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/audrey" />
+    <style>
+      body {
+        font-family: 'Montserrat', 'Inter', Arial, sans-serif;
+        background-color: #121212;
+        margin: 0;
+        padding: 0;
+      }
+      h1, h2, h3 {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+      }
+      .tw-gradient-text {
+        background: linear-gradient(180deg, #89FEA4 0%, #81CAE2 73%, #82C6DE 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-weight: 800;
+        display: inline-block;
+        font-family: 'Montserrat', 'Averta PE', 'Poppins', 'Arial Rounded MT Bold', Arial, sans-serif !important;
+      }
+      .section {
+        background-color: #181a1b;
+        border-radius: 18px;
+        box-shadow: 0 4px 24px 0 rgba(0,0,0,0.18);
+        border: 1px solid #23272a;
+        margin-bottom: 28px;
+      }
+      .section-header {
+        font-size: 22px;
+        margin-bottom: 18px;
+        color: #fff;
+        font-family: 'Cormorant Garamond', serif;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        background: linear-gradient(180deg, #89FEA4 0%, #81CAE2 73%, #82C6DE 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        display: inline-block;
+      }
+      .market-box {
+        background: #181a1b;
+        border-radius: 14px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+        border: 1px solid #23272a;
+        padding: 24px 18px;
+        margin-bottom: 0;
+      }
+      .market-box strong {
+        font-family: 'Inter', Arial, sans-serif;
+        font-size: 18px;
+        color: #b3b3b3;
+        margin-bottom: 10px;
+        display: block;
+      }
+      .market-box .price {
+        color: #fff;
+        font-size: 36px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        font-family: 'Inter', Arial, sans-serif;
+      }
+      .market-box .change {
+        font-size: 22px;
+        font-weight: bold;
+        padding: 8px 16px;
+        border-radius: 8px;
+        background: rgba(0,0,0,0.18);
+        display: inline-block;
+        margin-top: 4px;
+      }
+      .gainers, .losers {
+        border-radius: 14px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+        border: 1px solid #23272a;
+        padding: 20px;
+        margin-bottom: 20px;
+        background: #1b3d1b;
+      }
+      .losers {
+        background: #3d1b1b;
+      }
+      .gainers h3, .losers h3 {
+        font-size: 18px;
+        margin-bottom: 15px;
+        font-family: 'Cormorant Garamond', serif;
+        font-weight: 700;
+        background: none;
+        color: #4caf50;
+      }
+      .losers h3 {
+        color: #ef5350;
+      }
+      .gainers ul, .losers ul {
+        font-family: 'Inter', Arial, sans-serif;
+        font-size: 15px;
+      }
+      .market-summary {
+        background: #181a1b;
+        border-radius: 14px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+        border: 1px solid #23272a;
+        padding: 30px;
+        color: #e0e0e0;
+        font-family: 'Inter', Arial, sans-serif;
+        font-size: 16px;
+        line-height: 1.8;
+      }
+      .market-summary h2 {
+        font-size: 22px;
+        margin-bottom: 20px;
+        font-family: 'Cormorant Garamond', serif;
+        font-weight: 700;
+        background: linear-gradient(180deg, #89FEA4 0%, #81CAE2 73%, #82C6DE 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        display: inline-block;
+      }
+      .market-summary, .gainers ul, .losers ul, .market-box, .section, .market-summary div, .market-summary p, .market-summary span {
+        font-family: 'Montserrat', 'Inter', Arial, sans-serif !important;
+      }
+      /* Mobile styles */
+      @media only screen and (max-width: 600px) {
+        .container {
+          width: 100% !important;
+          padding: 0 !important;
+          margin: 0 !important;
+        }
+        
+        .stack {
+          display: block !important;
+          width: 100% !important;
+        }
+        
+        .center-text {
+          text-align: center !important;
+        }
+
+        /* Mobile-specific styles */
+        .mobile-padding {
+          padding: 12px !important;
+        }
+
+        .mobile-text-center {
+          text-align: center !important;
+        }
+
+        .mobile-font-size {
+          font-size: 24px !important;
+          line-height: 1.3 !important;
+        }
+
+        .mobile-small-font {
+          font-size: 14px !important;
+          line-height: 1.4 !important;
+        }
+
+        .market-box {
+          margin-bottom: 12px !important;
+          padding: 12px !important;
+        }
+
+        .market-overview-flex {
+          display: block !important;
+        }
+
+        .market-overview-box {
+          width: 100% !important;
+          margin-bottom: 12px !important;
+          padding: 12px !important;
+        }
+
+        .section {
+          padding: 12px !important;
+          margin-bottom: 16px !important;
+        }
+
+        .gainers, .losers {
+          padding: 12px !important;
+          margin-bottom: 12px !important;
+        }
+
+        .market-summary {
+          padding: 16px !important;
+        }
+
+        .market-summary p {
+          font-size: 14px !important;
+          line-height: 1.5 !important;
+          margin-bottom: 12px !important;
+        }
+
+        .market-summary h2 {
+          font-size: 20px !important;
+          margin-bottom: 16px !important;
+        }
+
+        .gainers h3, .losers h3 {
+          font-size: 16px !important;
+          margin-bottom: 12px !important;
+        }
+
+        .gainers ul li, .losers ul li {
+          font-size: 14px !important;
+          padding: 8px 0 !important;
+        }
+      }
+    </style>
+  </head>
+  <body style="margin:0; padding:0; background-color:#fff;">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#fff">
+      <tr>
+        <td align="center" style="background:#f7f7f7; padding:40px 0;">
+          <table class="container" width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px; background-color:#fff; margin:20px auto; border-radius:12px; font-family:'Segoe UI', Arial, sans-serif; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+            <!-- Header Section -->
+            <tr>
+              <td style="padding:22px 20px 18px 20px; border-radius:12px 12px 0 0; text-align:center;">
+                <img src="twlogo.png" alt="Truwealth.club Logo" style="max-width:220px; width:100%; height:auto; display:block; margin:0 auto 8px auto;" />
+                <h1 style="margin:0; font-size:36px; font-weight:800; letter-spacing:2px; text-align:center; color:#222; font-family:'Montserrat', 'Averta PE', 'Poppins', 'Arial Rounded MT Bold', Arial, sans-serif !important;">Market Digest</h1>
+                <p style="margin:8px 0 0; color:#444; font-size:15px; font-family:'Inter', Arial, sans-serif;">May 19, 2025</p>
+              </td>
+            </tr>
+
+            <!-- Market Overview Section -->
+            <tr>
+              <td style="padding:0 0 20px 0;">
+                <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#fff; border-radius:8px; border:1px solid #e0e0e0; margin-bottom:20px;">
+                  <tr>
+                    <td style="padding:16px;">
+                      <span style="color:#388e3c; font-size:18px; font-family:Arial, sans-serif; font-weight:bold;">Market Overview</span>
+                      <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:10px;">
+                        <tr>
+                          <td style="color:#222; font-family:Arial, sans-serif; font-size:15px; padding:8px 0; border-bottom:1px solid #e0e0e0;">Nifty 50</td>
+                          <td align="right" style="padding:8px 0; border-bottom:1px solid #e0e0e0;">
+                            <span style="color:#111; font-size:15px; font-weight:bold; font-family:Arial, sans-serif;">₹24945.45</span><br>
+                            <span style="color:#c62828; font-size:13px; font-family:Arial, sans-serif;">▼ -0.3%</span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="color:#222; font-family:Arial, sans-serif; font-size:15px; padding:8px 0;">Sensex</td>
+                          <td align="right" style="padding:8px 0;">
+                            <span style="color:#111; font-size:15px; font-weight:bold; font-family:Arial, sans-serif;">₹82059.42</span><br>
+                            <span style="color:#c62828; font-size:13px; font-family:Arial, sans-serif;">▼ -0.33%</span>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+
+                <!-- Pre-IPO Section -->
+                <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#fff; border-radius:8px; border:1px solid #e0e0e0; margin-bottom:20px;">
+                  <tr>
+                    <td style="padding:16px; position:relative;">
+                      <div style="margin-bottom:10px;">
+                        <span style="color:#388e3c; font-size:18px; font-family:Arial, sans-serif; font-weight:bold;">Top 5 Pre-IPO Watch</span>
+                      </div>
+                      <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:10px;">
+                        
+                        <tr>
+                          <td style="color:#222; font-family:Arial, sans-serif; font-size:15px; padding:8px 0; border-bottom:1px solid #e0e0e0;">
+                            <a href="https://truwealthclub.fillout.com/t/24gVw881Zius" style="color:#222; text-decoration:underline;">Indian Potash</a>
+                          </td>
+                          <td align="right" style="padding:8px 0; border-bottom:1px solid #e0e0e0;">
+                            <span style="color:#111; font-size:15px; font-weight:bold; font-family:Arial, sans-serif;">₹3100.0</span><br>
+                            <span style="color:#666; font-size:13px; font-family:Arial, sans-serif;">PE: 7.05</span>
+                          </td>
+                        </tr>
+                        
+                        <tr>
+                          <td style="color:#222; font-family:Arial, sans-serif; font-size:15px; padding:8px 0; border-bottom:1px solid #e0e0e0;">
+                            <a href="https://truwealthclub.fillout.com/t/24gVw881Zius" style="color:#222; text-decoration:underline;">HDFC Sec.</a>
+                          </td>
+                          <td align="right" style="padding:8px 0; border-bottom:1px solid #e0e0e0;">
+                            <span style="color:#111; font-size:15px; font-weight:bold; font-family:Arial, sans-serif;">₹9600.0</span><br>
+                            <span style="color:#666; font-size:13px; font-family:Arial, sans-serif;">PE: 13.64</span>
+                          </td>
+                        </tr>
+                        
+                        <tr>
+                          <td style="color:#222; font-family:Arial, sans-serif; font-size:15px; padding:8px 0; border-bottom:1px solid #e0e0e0;">
+                            <a href="https://truwealthclub.fillout.com/t/24gVw881Zius" style="color:#222; text-decoration:underline;">NSE India</a>
+                          </td>
+                          <td align="right" style="padding:8px 0; border-bottom:1px solid #e0e0e0;">
+                            <span style="color:#111; font-size:15px; font-weight:bold; font-family:Arial, sans-serif;">₹1695.0</span><br>
+                            <span style="color:#666; font-size:13px; font-family:Arial, sans-serif;">PE: 34.42</span>
+                          </td>
+                        </tr>
+                        
+                        <tr>
+                          <td style="color:#222; font-family:Arial, sans-serif; font-size:15px; padding:8px 0; border-bottom:1px solid #e0e0e0;">
+                            <a href="https://truwealthclub.fillout.com/t/24gVw881Zius" style="color:#222; text-decoration:underline;">CSK</a>
+                          </td>
+                          <td align="right" style="padding:8px 0; border-bottom:1px solid #e0e0e0;">
+                            <span style="color:#111; font-size:15px; font-weight:bold; font-family:Arial, sans-serif;">₹189.0</span><br>
+                            <span style="color:#666; font-size:13px; font-family:Arial, sans-serif;">PE: 35.59</span>
+                          </td>
+                        </tr>
+                        
+                        <tr>
+                          <td style="color:#222; font-family:Arial, sans-serif; font-size:15px; padding:8px 0; border-bottom:1px solid #e0e0e0;">
+                            <a href="https://truwealthclub.fillout.com/t/24gVw881Zius" style="color:#222; text-decoration:underline;">Orbis</a>
+                          </td>
+                          <td align="right" style="padding:8px 0; border-bottom:1px solid #e0e0e0;">
+                            <span style="color:#111; font-size:15px; font-weight:bold; font-family:Arial, sans-serif;">₹455.0</span><br>
+                            <span style="color:#666; font-size:13px; font-family:Arial, sans-serif;">PE: 39.29</span>
+                          </td>
+                        </tr>
+                        
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+                <!-- Join the Club Button below Pre-IPO Watch -->
+                <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:20px;">
+                  <tr>
+                    <td align="center">
+                      <a href="https://chat.whatsapp.com/Kb6Oy1mRdHFI6dapbiMzqa" style="display:inline-block; background:linear-gradient(180deg, #89FEA4 0%, #81CAE2 73%, #82C6DE 100%); color:#fff; text-decoration:none; padding:12px 24px; border-radius:8px; font-size:16px; font-weight:bold; font-family:Arial, sans-serif; box-shadow:0 4px 12px rgba(0,0,0,0.15);">Join the Club</a>
+                    </td>
+                  </tr>
+                </table>
+
+                <!-- Market Performance (Graph) -->
+                <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f7f7f7; border-radius:8px; border:1px solid #e0e0e0; margin-bottom:20px;">
+                  <tr>
+                    <td style="padding:16px;">
+                      <span style="color:#388e3c; font-size:18px; font-family:Arial, sans-serif; font-weight:bold;">Market Performance</span>
+                      <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:10px;">
+                        <tr>
+                          <td style="color:#222; font-family:Arial, sans-serif; font-size:15px; padding:8px 0;">
+                            <span style="color:#222;">Nifty 50</span><br>
+                            <img src="cid:nifty50graph" alt="Nifty 50 Graph" style="width:100%; height:auto; border-radius:4px; margin-top:8px;">
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+
+                <!-- Top Gainers -->
+                <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#fff; border-radius:8px; border:1px solid #e0e0e0; margin-bottom:20px;">
+                  <tr>
+                    <td style="padding:16px;">
+                      <span style="color:#388e3c; font-size:18px; font-family:Arial, sans-serif; font-weight:bold;">&#128200; Nifty 50 Top Gainers</span>
+                      <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:10px;">
+                        
+                        <tr>
+                          <td style="color:#222; font-family:Arial, sans-serif; font-size:15px; padding:8px 0; border-bottom:1px solid #e0e0e0;">DIVISLAB</td>
+                          <td align="right" style="padding:8px 0; border-bottom:1px solid #e0e0e0;">
+                            <span style="color:#111; font-size:15px; font-weight:bold; font-family:Arial, sans-serif;">₹6580.0</span><br>
+                            <span style="color:#388e3c; font-size:13px; font-family:Arial, sans-serif;">▲ 4.79%</span>
+                          </td>
+                        </tr>
+                        
+                        <tr>
+                          <td style="color:#222; font-family:Arial, sans-serif; font-size:15px; padding:8px 0; border-bottom:1px solid #e0e0e0;">POWERGRID</td>
+                          <td align="right" style="padding:8px 0; border-bottom:1px solid #e0e0e0;">
+                            <span style="color:#111; font-size:15px; font-weight:bold; font-family:Arial, sans-serif;">₹304.05</span><br>
+                            <span style="color:#388e3c; font-size:13px; font-family:Arial, sans-serif;">▲ 1.28%</span>
+                          </td>
+                        </tr>
+                        
+                        <tr>
+                          <td style="color:#222; font-family:Arial, sans-serif; font-size:15px; padding:8px 0; border-bottom:1px solid #e0e0e0;">HEROMOTOCO</td>
+                          <td align="right" style="padding:8px 0; border-bottom:1px solid #e0e0e0;">
+                            <span style="color:#111; font-size:15px; font-weight:bold; font-family:Arial, sans-serif;">₹4387.7</span><br>
+                            <span style="color:#388e3c; font-size:13px; font-family:Arial, sans-serif;">▲ 0.98%</span>
+                          </td>
+                        </tr>
+                        
+                        <tr>
+                          <td style="color:#222; font-family:Arial, sans-serif; font-size:15px; padding:8px 0; border-bottom:1px solid #e0e0e0;">BAJFINANCE</td>
+                          <td align="right" style="padding:8px 0; border-bottom:1px solid #e0e0e0;">
+                            <span style="color:#111; font-size:15px; font-weight:bold; font-family:Arial, sans-serif;">₹9255.5</span><br>
+                            <span style="color:#388e3c; font-size:13px; font-family:Arial, sans-serif;">▲ 0.97%</span>
+                          </td>
+                        </tr>
+                        
+                        <tr>
+                          <td style="color:#222; font-family:Arial, sans-serif; font-size:15px; padding:8px 0; border-bottom:1px solid #e0e0e0;">NTPC</td>
+                          <td align="right" style="padding:8px 0; border-bottom:1px solid #e0e0e0;">
+                            <span style="color:#111; font-size:15px; font-weight:bold; font-family:Arial, sans-serif;">₹345.15</span><br>
+                            <span style="color:#388e3c; font-size:13px; font-family:Arial, sans-serif;">▲ 0.6%</span>
+                          </td>
+                        </tr>
+                        
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+
+                <!-- Top Losers -->
+                <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#fff; border-radius:8px; border:1px solid #e0e0e0; margin-bottom:20px;">
+                  <tr>
+                    <td style="padding:16px;">
+                      <span style="color:#c62828; font-size:18px; font-family:Arial, sans-serif; font-weight:bold;">&#128201; Nifty 50 Top Losers</span>
+                      <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:10px;">
+                        
+                        <tr>
+                          <td style="color:#222; font-family:Arial, sans-serif; font-size:15px; padding:8px 0; border-bottom:1px solid #e0e0e0;">GRASIM</td>
+                          <td align="right" style="padding:8px 0; border-bottom:1px solid #e0e0e0;">
+                            <span style="color:#111; font-size:15px; font-weight:bold; font-family:Arial, sans-serif;">₹2727.0</span><br>
+                            <span style="color:#c62828; font-size:13px; font-family:Arial, sans-serif;">▼ -2.75%</span>
+                          </td>
+                        </tr>
+                        
+                        <tr>
+                          <td style="color:#222; font-family:Arial, sans-serif; font-size:15px; padding:8px 0; border-bottom:1px solid #e0e0e0;">INFY</td>
+                          <td align="right" style="padding:8px 0; border-bottom:1px solid #e0e0e0;">
+                            <span style="color:#111; font-size:15px; font-weight:bold; font-family:Arial, sans-serif;">₹1559.8</span><br>
+                            <span style="color:#c62828; font-size:13px; font-family:Arial, sans-serif;">▼ -1.89%</span>
+                          </td>
+                        </tr>
+                        
+                        <tr>
+                          <td style="color:#222; font-family:Arial, sans-serif; font-size:15px; padding:8px 0; border-bottom:1px solid #e0e0e0;">TATACONSUM</td>
+                          <td align="right" style="padding:8px 0; border-bottom:1px solid #e0e0e0;">
+                            <span style="color:#111; font-size:15px; font-weight:bold; font-family:Arial, sans-serif;">₹1149.3</span><br>
+                            <span style="color:#c62828; font-size:13px; font-family:Arial, sans-serif;">▼ -1.6%</span>
+                          </td>
+                        </tr>
+                        
+                        <tr>
+                          <td style="color:#222; font-family:Arial, sans-serif; font-size:15px; padding:8px 0; border-bottom:1px solid #e0e0e0;">TCS</td>
+                          <td align="right" style="padding:8px 0; border-bottom:1px solid #e0e0e0;">
+                            <span style="color:#111; font-size:15px; font-weight:bold; font-family:Arial, sans-serif;">₹3518.8</span><br>
+                            <span style="color:#c62828; font-size:13px; font-family:Arial, sans-serif;">▼ -1.19%</span>
+                          </td>
+                        </tr>
+                        
+                        <tr>
+                          <td style="color:#222; font-family:Arial, sans-serif; font-size:15px; padding:8px 0; border-bottom:1px solid #e0e0e0;">TECHM</td>
+                          <td align="right" style="padding:8px 0; border-bottom:1px solid #e0e0e0;">
+                            <span style="color:#111; font-size:15px; font-weight:bold; font-family:Arial, sans-serif;">₹1597.8</span><br>
+                            <span style="color:#c62828; font-size:13px; font-family:Arial, sans-serif;">▼ -1.19%</span>
+                          </td>
+                        </tr>
+                        
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+
+                <!-- Market Summary -->
+                <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#fff; border-radius:8px; border:1px solid #e0e0e0; margin-bottom:20px;">
+                  <tr>
+                    <td style="padding:16px;">
+                      <span style="color:#388e3c; font-size:18px; font-family:Arial, sans-serif; font-weight:bold;">Market Summary</span>
+                      <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:10px;">
+                        <tr>
+                          <td style="color:#222; font-family:Arial, sans-serif; font-size:15px; padding:8px 0;">
+                            
+                              
+                                <p style="color:#222; margin:0 0 15px; padding-left:20px; position:relative; font-family:Arial, sans-serif; font-size:15px;">
+                                  <span style="position:absolute; left:0; color:#388e3c; font-weight:800;">•</span>
+                                  <span style="color:#222;">Divi's Laboratories reports robust Q3 financial performance with strong API demand driving a 64.5% increase in profit 📈</span>
+                                </p>
+                              
+                            
+                              
+                            
+                              
+                                <p style="color:#222; margin:0 0 15px; padding-left:20px; position:relative; font-family:Arial, sans-serif; font-size:15px;">
+                                  <span style="position:absolute; left:0; color:#388e3c; font-weight:800;">•</span>
+                                  <span style="color:#222;">Power Grid Corp showcases robust profits in Q3, navigating project execution hurdles and regulatory impacts ⚡</span>
+                                </p>
+                              
+                            
+                              
+                            
+                              
+                                <p style="color:#222; margin:0 0 15px; padding-left:20px; position:relative; font-family:Arial, sans-serif; font-size:15px;">
+                                  <span style="position:absolute; left:0; color:#388e3c; font-weight:800;">•</span>
+                                  <span style="color:#222;">Hero MotoCorp reports a 6.4% increase in profit, with a strong performance in the EV sector, while Bajaj Finance extends its rally to a record high on smooth top management succession 💰</span>
+                                </p>
+                              
+                            
+                              
+                            
+                              
+                                <p style="color:#222; margin:0 0 15px; padding-left:20px; position:relative; font-family:Arial, sans-serif; font-size:15px;">
+                                  <span style="position:absolute; left:0; color:#388e3c; font-weight:800;">•</span>
+                                  <span style="color:#222;">Infosys and TCS see growth amid industry challenges, with Infosys reporting robust free cash flow and TCS predicting rising tech spending by corporations</span>
+                                </p>
+                              
+                            
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+
+                <!-- Buy Now Button -->
+                <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:30px 0;">
+                  <tr>
+                    <td align="center">
+                      <table cellpadding="0" cellspacing="0" border="0" style="width:auto;">
+                        <tr>
+                          <td style="padding-bottom:10px;" align="center">
+                            <a href="https://truwealthclub.fillout.com/t/24gVw881Zius" style="display:inline-block; background:linear-gradient(180deg, #89FEA4 0%, #81CAE2 73%, #82C6DE 100%); color:#fff; text-decoration:none; padding:12px 24px; border-radius:8px; font-size:16px; font-weight:bold; font-family:Arial, sans-serif; box-shadow:0 4px 12px rgba(0,0,0,0.15);">Buy Pre-IPO Shares Now</a>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td align="center">
+                            <a href="https://chat.whatsapp.com/Kb6Oy1mRdHFI6dapbiMzqa" style="display:inline-block; background:linear-gradient(180deg, #89FEA4 0%, #81CAE2 73%, #82C6DE 100%); color:#fff; text-decoration:none; padding:12px 24px; border-radius:8px; font-size:16px; font-weight:bold; font-family:Arial, sans-serif; box-shadow:0 4px 12px rgba(0,0,0,0.15);">Join the Club</a>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+
+                <!-- Footer -->
+                <div style="margin-top:30px; padding-top:20px; border-top:1px solid #404040; text-align:center;">
+                  <p style="margin:0; color:#808080; font-size:12px;">This is an automated email from Truwealth.club. Please do not reply.</p>
+                  <p style="margin:10px 0 0; color:#808080; font-size:12px;">© 2025 Truwealth.club. All rights reserved.</p>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

@@ -8,6 +8,21 @@ An automated email bot that sends market digest reports with Nifty50 and Sensex 
 - Secure email delivery using Gmail SMTP
 - Customizable email templates
 
+## Project Structure
+```
+email_bot/
+├── email/
+│   ├── send_sample_email.py    # Main email sending script
+│   ├── render_email.py         # Email template rendering
+│   ├── rendered_email.html     # Email template
+│   ├── nifty50_graph.png       # Market visualization
+│   ├── sensex_graph.png        # Market visualization
+│   └── twlogo.png             # Company logo
+├── requirements.txt            # Project dependencies
+├── .env.example               # Environment variables template
+└── README.md                  # Project documentation
+```
+
 ## Setup
 1. Clone the repository
 2. Create a virtual environment:
@@ -25,12 +40,13 @@ An automated email bot that sends market digest reports with Nifty50 and Sensex 
    ```
    EMAIL_ADDRESS=your_email@gmail.com
    EMAIL_PASSWORD=your_app_password
+   RECIPIENT_EMAILS=email1@example.com,email2@example.com
    ```
 
 ## Usage
 Run the email sender:
 ```bash
-python venv/email/send_sample_email.py
+python email/send_sample_email.py
 ```
 
 ## Deployment
